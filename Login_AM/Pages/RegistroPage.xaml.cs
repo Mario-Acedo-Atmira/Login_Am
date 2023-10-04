@@ -3,6 +3,7 @@ using Login_AM.Data;
 using Login_AM.Pages;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace Login_AM.Pages;
 
@@ -15,15 +16,16 @@ public partial class RegistroPage : ContentPage
         txt_pass.IsPassword = true;
     }
 
-    private async void Registrarse(object sender, EventArgs e)
+    public async void Registrarse(object sender, EventArgs e)
     {
-        Entry txt_nombre = (Entry)FindByName("txt_nombre");
-        Entry txt_ape1 = (Entry)FindByName("txt_ape1");
-        Entry txt_ape2 = (Entry)FindByName("txt_ape2");
-        Entry txt_tel = (Entry)FindByName("txt_tel");
-        Entry txt_email = (Entry)FindByName("txt_email");
-        Entry txt_pass = (Entry)FindByName("txt_pass");
-        await Login_User(txt_email.Text, txt_pass.Text, txt_nombre.Text, txt_ape1.Text, txt_ape2.Text, txt_tel.Text);
+        if (nameValidator.IsNotValid)
+        {
+            DisplayAlert("Error", "Tienes que introducir el nombre", "OK");
+        }
+        else
+        {
+            await Login_User(txt_email.Text, txt_pass.Text, txt_nombre.Text, txt_ape1.Text, txt_ape2.Text, txt_tel.Text);
+        }
     }
     public async Task Login_User(string username, string password, string nombre, string ape1, string ape2, string tel)
     {
@@ -36,7 +38,7 @@ public partial class RegistroPage : ContentPage
             client.BaseAddress = new Uri(todoUrl);
             var userParams = new UserRegister(0,nombre,ape1,ape2,tel, username, password);
             var result = await RegisterParametersAsync(userParams, todoUrl);
-            await Navigation.PushAsync(new InicioPage());
+            await Navigation.PushAsync(new MainPage());
 
         }
         catch (Exception ex)
@@ -66,5 +68,20 @@ public partial class RegistroPage : ContentPage
             imageButton.Source = ImageSource.FromFile("eyeon.png");
             txt_pass.IsPassword = true;
         }
+    }
+
+    private bool IsValidPassword(string password)
+    {
+        var hasNumber = new Regex(@"[0-9]+");
+        var hasUpperChar = new Regex(@"[A-Z]+");
+        var hasLowerChar = new Regex(@"[a-z]+");
+        var hasMinimum8Chars = new Regex(@".{8,}");
+
+        var isValid = hasNumber.IsMatch(password) &&
+            hasUpperChar.IsMatch(password) &&
+            hasLowerChar.IsMatch(password) &&
+            hasMinimum8Chars.IsMatch(password);
+
+        return isValid;
     }
 }

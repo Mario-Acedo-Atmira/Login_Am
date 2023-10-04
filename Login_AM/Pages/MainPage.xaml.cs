@@ -4,6 +4,7 @@ using Login_AM.Pages;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace Login_AM.Pages;
@@ -19,9 +20,23 @@ public partial class MainPage : ContentPage
     }
     private async void Loguearse(object sender, EventArgs e)
     {
-        Entry txt_email = (Entry)FindByName("txt_email");
-        Entry txt_pass = (Entry)FindByName("txt_pass");
-        await Login_User(txt_email.Text, txt_pass.Text);
+
+        if (emailValidator.IsNotValid)
+        {
+                DisplayAlert("Error", emailValidator.Errors[0].ToString(), "OK");
+        }
+        else if (passValidator.IsNotValid)
+        {
+            DisplayAlert("Error", "Tienes que introducir la contraseña", "OK");
+        }
+        else if(!IsValidPassword(txt_pass.Text))
+        {
+            DisplayAlert("Error", "La contraseña debe tener 8 carácteres, una mayúscula, una minúscula y un numero", "OK");
+        }
+        else
+        {
+            await Login_User(txt_email.Text, txt_pass.Text);
+        }
     }
     public async Task Login_User(string username, string password)
     {
@@ -74,6 +89,21 @@ public partial class MainPage : ContentPage
             imageButton.Source = ImageSource.FromFile("eyeon.png");
             txt_pass.IsPassword = true;
         }
+    }
+
+    private bool IsValidPassword(string password)
+    {
+        var hasNumber = new Regex(@"[0-9]+");
+        var hasUpperChar = new Regex(@"[A-Z]+");
+        var hasLowerChar = new Regex(@"[a-z]+");
+        var hasMinimum8Chars = new Regex(@".{8,}");
+
+        var isValid = hasNumber.IsMatch(password) &&
+            hasUpperChar.IsMatch(password) &&
+            hasLowerChar.IsMatch(password) &&
+            hasMinimum8Chars.IsMatch(password);
+
+        return isValid;
     }
 
     private async void Registro(object sender, EventArgs e)

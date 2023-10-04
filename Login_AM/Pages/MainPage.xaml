@@ -2,19 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cmp="clr-namespace:Microsoft.Maui.Controls.Compatibility;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:local="clr-namespace:Login_AM"
              x:Class="Login_AM.Pages.MainPage">
     <!--BackgroundColor="{DynamicResource PageBackgroundColor}"-->
     <ContentPage.Content>
         <VerticalStackLayout>
             <Label Text="Email" Margin="5,10,0,0" TextColor="Black"/>
-            <Entry x:Name="txt_email" Placeholder="Introduce tu email" Margin="5,0,0,0"/>
+            <Entry x:Name="txt_email" Placeholder="Introduce tu email" Margin="5,0,0,0">
+                <Entry.Behaviors>
+                    <toolkit:MultiValidationBehavior
+                        x:Name="emailValidator"
+                        Flags="ValidateOnAttaching,ValidateOnValueChanged">
+                        <toolkit:TextValidationBehavior
+                        Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                            toolkit:MultiValidationBehavior.Error="Tienes que introducir el email"
+                        MinimumLength="1"
+                        />
+                        <toolkit:EmailValidationBehavior
+                            Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                            toolkit:MultiValidationBehavior.Error="El formato de email es incorrecto"
+                            />
+                    </toolkit:MultiValidationBehavior>
+                </Entry.Behaviors>
+            </Entry>
             <Label Text="Contraseña" Margin="5,10,0,0" TextColor="Black" />
             <cmp:RelativeLayout Margin="5,0,0,0">
                 <Entry x:Name="txt_pass"  Placeholder="Introduce tu contraseña"
                    cmp:RelativeLayout.XConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=X, Constant=0}"
                    cmp:RelativeLayout.WidthConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9}"
-                   cmp:RelativeLayout.HeightConstraint="{cmp:ConstraintExpression Type=Constant, Constant= 50}"/>
+                   cmp:RelativeLayout.HeightConstraint="{cmp:ConstraintExpression Type=Constant, Constant= 50}">
+                    <Entry.Behaviors>
+                        <toolkit:TextValidationBehavior
+                            x:Name="passValidator"
+                        Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                        MinimumLength="1"
+                        />
+                    </Entry.Behaviors>
+                </Entry>
                 <ImageButton BackgroundColor="Transparent"
                          Source="eyeon.png" Clicked="ImageButton_Clicked"
                    cmp:RelativeLayout.XConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=Width, Constant=-50}"
