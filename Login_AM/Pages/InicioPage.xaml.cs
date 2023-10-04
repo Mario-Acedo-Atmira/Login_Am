@@ -2,7 +2,7 @@ namespace Login_AM.Pages;
 
 public partial class InicioPage : ContentPage
 {
-	public InicioPage()
+	public InicioPage(string token)
 	{
 		InitializeComponent();
 	}

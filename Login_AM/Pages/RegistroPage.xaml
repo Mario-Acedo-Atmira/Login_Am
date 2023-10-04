@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cmp="clr-namespace:Microsoft.Maui.Controls.Compatibility;assembly=Microsoft.Maui.Controls"
              x:Class="Login_AM.Pages.RegistroPage"
              Title="Registro">
     <VerticalStackLayout>
-        <Label Text="Nombre" TextColor="Black"/>
-        <Editor x:Name="txt_nombre" Placeholder="Introduce tu nombre"/>
-        <Label Text="Primer Apellido" TextColor="Black"/>
-        <Editor x:Name="txt_ape1" Placeholder="Introduce tu primer apellido"/>
-        <Label Text="Segundo Apellido" TextColor="Black"/>
-        <Editor x:Name="txt_ape2" Placeholder="Introduce tu segundo apellido"/>
-        <Label Text="Teléfono" TextColor="Black"/>
-        <Editor x:Name="txt_tel" Placeholder="Introduce tu teléfono"/>
-        <Label Text="Introduce tu email" TextColor="Black"/>
-        <Editor x:Name="txt_email" Placeholder="Introduce tu email"/>
-        <Label Text="Introduce tu contraseña" TextColor="Black"/>
-        <Editor x:Name="txt_pass" Placeholder="Introduce tu contraseña"/>
-        <HorizontalStackLayout>
-            <Button Text="Regristrate" Clicked="Registrarse"/>
+        <Label Text="Nombre" TextColor="Black" Margin="5,10,0,0"/>
+        <Entry x:Name="txt_nombre" Margin="5,0,0,0" Placeholder="Introduce tu nombre"/>
+        <Label Text="Primer Apellido" Margin="5,10,0,0" TextColor="Black"/>
+        <Entry x:Name="txt_ape1" Margin="5,0,0,0" Placeholder="Introduce tu primer apellido"/>
+        <Label Text="Segundo Apellido" Margin="5,10,0,0" TextColor="Black"/>
+        <Entry x:Name="txt_ape2" Margin="5,0,0,0" Placeholder="Introduce tu segundo apellido"/>
+        <Label Text="Teléfono" Margin="5,10,0,0" TextColor="Black"/>
+        <Entry x:Name="txt_tel" Margin="5,0,0,0" Placeholder="Introduce tu teléfono"/>
+        <Label Text="Email" Margin="5,10,0,0" TextColor="Black"/>
+        <Entry x:Name="txt_email" Margin="5,0,0,0" Placeholder="Introduce tu email"/>
+        <Label Text="Contraseña" Margin="5,10,0,0" TextColor="Black"/>
+        <cmp:RelativeLayout Margin="5,0,0,0">
+            <Entry x:Name="txt_pass"  Placeholder="Introduce tu contraseña"
+                   cmp:RelativeLayout.XConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=X, Constant=0}"
+                   cmp:RelativeLayout.WidthConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9}"
+                   cmp:RelativeLayout.HeightConstraint="{cmp:ConstraintExpression Type=Constant, Constant= 50}"/>
+            <ImageButton BackgroundColor="Transparent"
+                         Source="eyeon.png" Clicked="ImageButton_Clicked"
+                   cmp:RelativeLayout.XConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=Width, Constant=-50}"
+                   cmp:RelativeLayout.WidthConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.10}"
+                   cmp:RelativeLayout.HeightConstraint="{cmp:ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.10}" />
+        </cmp:RelativeLayout>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Button Text="Regristrate" MinimumWidthRequest="300" Clicked="Registrarse" Margin="0,20,0,0"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

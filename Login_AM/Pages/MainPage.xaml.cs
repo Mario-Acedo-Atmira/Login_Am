@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
             var resultparse = JsonSerializer.Deserialize<UserResponse>(result);
             if (resultparse.token!=null)
             {
-                await Navigation.PushAsync(new InicioPage());
+                await Navigation.PushAsync(new InicioPage(resultparse.token));
             }
             
         }

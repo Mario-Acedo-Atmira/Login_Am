@@ -11,16 +11,18 @@ public partial class RegistroPage : ContentPage
 	public RegistroPage()
 	{
 		InitializeComponent();
-	}
+        BindingContext = this;
+        txt_pass.IsPassword = true;
+    }
 
     private async void Registrarse(object sender, EventArgs e)
     {
-        Editor txt_nombre = (Editor)FindByName("txt_nombre");
-        Editor txt_ape1 = (Editor)FindByName("txt_ape1");
-        Editor txt_ape2 = (Editor)FindByName("txt_ape2");
-        Editor txt_tel = (Editor)FindByName("txt_tel");
-        Editor txt_email = (Editor)FindByName("txt_email");
-        Editor txt_pass = (Editor)FindByName("txt_pass");
+        Entry txt_nombre = (Entry)FindByName("txt_nombre");
+        Entry txt_ape1 = (Entry)FindByName("txt_ape1");
+        Entry txt_ape2 = (Entry)FindByName("txt_ape2");
+        Entry txt_tel = (Entry)FindByName("txt_tel");
+        Entry txt_email = (Entry)FindByName("txt_email");
+        Entry txt_pass = (Entry)FindByName("txt_pass");
         await Login_User(txt_email.Text, txt_pass.Text, txt_nombre.Text, txt_ape1.Text, txt_ape2.Text, txt_tel.Text);
     }
     public async Task Login_User(string username, string password, string nombre, string ape1, string ape2, string tel)
@@ -49,5 +51,20 @@ public partial class RegistroPage : ContentPage
         var response = await client.PostAsJsonAsync(uri + "Auth/register", userParams);
 
             return await response.Content.ReadAsStringAsync();
+    }
+
+    private void ImageButton_Clicked(object sender, EventArgs e)
+    {
+        var imageButton = sender as ImageButton;
+        if (txt_pass.IsPassword)
+        {
+            imageButton.Source = ImageSource.FromFile("eyeoff.png");
+            txt_pass.IsPassword = false;
+        }
+        else
+        {
+            imageButton.Source = ImageSource.FromFile("eyeon.png");
+            txt_pass.IsPassword = true;
+        }
     }
 }
