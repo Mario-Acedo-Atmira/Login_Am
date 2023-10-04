@@ -9,7 +9,8 @@ namespace Login_AM.Pages;
 
 public partial class RegistroPage : ContentPage
 {
-	public RegistroPage()
+    private readonly HttpClient _httpClient = new HttpClient();
+    public RegistroPage()
 	{
 		InitializeComponent();
         BindingContext = this;
@@ -31,11 +32,12 @@ public partial class RegistroPage : ContentPage
     {
         try
         {
-            ServicioCertificacion handler = new ServicioCertificacion();
-            HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-            string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
+            //ServicioCertificacion handler = new ServicioCertificacion();
+            //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+            //string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
+            string BaseAddress = "https://localhost:7083";
             string todoUrl = $"{BaseAddress}/api/";
-            client.BaseAddress = new Uri(todoUrl);
+            _httpClient.BaseAddress = new Uri(todoUrl);
             var userParams = new UserRegister(0,nombre,ape1,ape2,tel, username, password);
             var result = await RegisterParametersAsync(userParams, todoUrl);
             await Navigation.PushAsync(new MainPage());
@@ -48,9 +50,10 @@ public partial class RegistroPage : ContentPage
     }
     private async Task<String> RegisterParametersAsync(UserRegister userParams, string uri)
     {
-        ServicioCertificacion handler = new ServicioCertificacion();
-        HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-        var response = await client.PostAsJsonAsync(uri + "Auth/register", userParams);
+        //ServicioCertificacion handler = new ServicioCertificacion();
+        //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+
+        var response = await _httpClient.PostAsJsonAsync(uri + "Auth/register", userParams);
 
             return await response.Content.ReadAsStringAsync();
     }

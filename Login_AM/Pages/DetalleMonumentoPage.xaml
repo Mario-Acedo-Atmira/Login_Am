@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Login_AM.Pages.DetalleMonumentoPage"
-             Title="NewPage1">
+             x:Class="Login_AM.Pages.DetalleMonumentoPage">
+    <ScrollView>
     <VerticalStackLayout >
         <VerticalStackLayout WidthRequest="360">
             <Image x:Name="img" />
         </VerticalStackLayout>
         <Label Text="Titulo Monumento" x:Name="titulo" TextColor="Black" HorizontalTextAlignment="Start"/>
-        <Label Text="Decripción Monumento" TextColor="Black" HorizontalTextAlignment="Start"/>
-
+        <Label Text="Decripción Monumento" x:Name="description" TextColor="Black" HorizontalTextAlignment="Start"/>
+            <VerticalStackLayout x:Name="Layoutcomentarios" Margin="0,20,0,0">
+                <Label TextColor="Black" Margin="0,10,0,10">Comentarios</Label>
+            
+            </VerticalStackLayout>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
