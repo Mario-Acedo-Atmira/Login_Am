@@ -8,7 +8,7 @@
         <VerticalStackLayout>
 
             <VerticalStackLayout>
-                    <ImageButton Source="Monumento1.png"
+                <ImageButton Source="Monumento1.png"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                                  Margin="10,10,0,0"
@@ -16,41 +16,7 @@
                                  HeightRequest="360"
                                  Clicked="DetalleIdea1"/>
 
-                    <Label HorizontalOptions="Center" Margin="10,-1,0,0" WidthRequest="360"  Text="Monumento1"  TextColor="Black"/>
-                </VerticalStackLayout>
-
-                <VerticalStackLayout>
-                    <ImageButton Source="Monumento2.png"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                                 Margin="10,10,0,0"
-                                 WidthRequest="360"
-                                 HeightRequest="360"
-                                 Clicked="DetalleIdea2"/>
-
-                    <Label HorizontalOptions="Center" Margin="10,-1,0,0" WidthRequest="360"  Text="Monumento2"  TextColor="Black"/>
-                </VerticalStackLayout>
-
-                <VerticalStackLayout>
-                    <ImageButton Source="Monumento3.png"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                                 Margin="10,10,0,0"
-                                 WidthRequest="360"
-                                 HeightRequest="360"
-                                 Clicked="DetalleIdea3"/>
-
-                    <Label HorizontalOptions="Center" Margin="10,-1,0,0" WidthRequest="360"  Text="Monumento3"  TextColor="Black"/>
-                </VerticalStackLayout>
-            <VerticalStackLayout>
-                <ImageButton Source="Monumento4.png"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                                 Margin="10,10,0,0"
-                                 WidthRequest="360"
-                                 HeightRequest="360"
-                                 Clicked="DetalleIdea4"/>
-                <Label HorizontalOptions="Center" Margin="10,-1,0,0" WidthRequest="360"  Text="Monumento4"  TextColor="Black"/>
+                <Label HorizontalOptions="Center" Margin="10,-1,0,0" WidthRequest="360"  Text="Monumento1"  TextColor="Black"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
