@@ -1,5 +1,6 @@
 
 
+using Login_AM.Data;
 using Login_AM.Models;
 using System.Text.Json;
 
@@ -24,12 +25,12 @@ public partial class DetalleMonumentoPage : ContentPage
     {
         try
         {
-            //ServicioCertificacion handler = new ServicioCertificacion();
-            //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-            //string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
-            string BaseAddress = "https://localhost:7083";
+            ServicioCertificacion handler = new ServicioCertificacion();
+            HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+            string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
+            //string BaseAddress = "https://localhost:7083";
             string todoUrl = $"{BaseAddress}/api/";
-            _httpClient.BaseAddress = new Uri(todoUrl);
+            client.BaseAddress = new Uri(todoUrl);
             var result = await GetWorkItem(todoUrl);
             var workitem = JsonSerializer.Deserialize<WorkItemsResponse>(result);
             Mostrar_Datos(workitem,todoUrl);
@@ -45,10 +46,10 @@ public partial class DetalleMonumentoPage : ContentPage
 
     private async Task<String> GetWorkItem(string uri)
     {
-        //ServicioCertificacion handler = new ServicioCertificacion();
-        //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
-        var response = await _httpClient.GetAsync(uri + "WorkItems/"+Item.id.ToString());
+        ServicioCertificacion handler = new ServicioCertificacion();
+        HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+        var response = await client.GetAsync(uri + "WorkItems/"+Item.id.ToString());
 
         if (response.IsSuccessStatusCode)
         {
@@ -86,10 +87,10 @@ public partial class DetalleMonumentoPage : ContentPage
     }
     private async Task<String> ObtenerNombre(int id,string uri)
     {
-        //ServicioCertificacion handler = new ServicioCertificacion();
-        //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
-        var response = await _httpClient.GetAsync(uri + "Users/"+id);
+        ServicioCertificacion handler = new ServicioCertificacion();
+        HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+        var response = await client.GetAsync(uri + "Users/"+id);
 
         if (response.IsSuccessStatusCode)
         {

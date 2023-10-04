@@ -1,3 +1,4 @@
+using Login_AM.Data;
 using Login_AM.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -18,12 +19,12 @@ public partial class InicioPage : ContentPage
     {
         try
         {
-            //ServicioCertificacion handler = new ServicioCertificacion();
-            //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-            //string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
-            string BaseAddress = "https://localhost:7083";
+            ServicioCertificacion handler = new ServicioCertificacion();
+            HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+            string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
+            //string BaseAddress = "https://localhost:7083";
             string todoUrl = $"{BaseAddress}/api/";
-            _httpClient.BaseAddress = new Uri(todoUrl);
+            client.BaseAddress = new Uri(todoUrl);
             var result = await GetWorkItems(todoUrl);
             var lista = JsonSerializer.Deserialize<List<WorkItemsResponse>>(result);
             Mostrar_Datos(lista);
@@ -38,10 +39,10 @@ public partial class InicioPage : ContentPage
     }
     private async Task<String> GetWorkItems(string uri)
     {
-        //ServicioCertificacion handler = new ServicioCertificacion();
-        //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
-        var response = await _httpClient.GetAsync(uri + "WorkItems");
+        ServicioCertificacion handler = new ServicioCertificacion();
+        HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token);
+        var response = await client.GetAsync(uri + "WorkItems");
         
         if (response.IsSuccessStatusCode)
         {

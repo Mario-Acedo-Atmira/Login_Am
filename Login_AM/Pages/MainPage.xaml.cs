@@ -42,10 +42,10 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            //ServicioCertificacion handler = new ServicioCertificacion();
-            //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-            //string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
-            string BaseAddress = "https://localhost:7083";
+            ServicioCertificacion handler = new ServicioCertificacion();
+            HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+            string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
+            //string BaseAddress = "https://localhost:7083";
             string todoUrl = $"{BaseAddress}/api/";
             _httpClient.BaseAddress = new Uri(todoUrl);
             var userParams = new User(username, password);
@@ -64,9 +64,9 @@ public partial class MainPage : ContentPage
     }
     private async Task<String> GetUserParametersAsync(User userParams, string uri)
     {
-        //ServicioCertificacion handler = new ServicioCertificacion();
-        //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
-        var response = await _httpClient.PostAsJsonAsync(uri + "Auth/login", userParams);
+        ServicioCertificacion handler = new ServicioCertificacion();
+        HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
+        var response = await client.PostAsJsonAsync(uri + "Auth/login", userParams);
 
         if (response.IsSuccessStatusCode)
         {
