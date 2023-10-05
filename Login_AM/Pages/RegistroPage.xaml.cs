@@ -19,9 +19,42 @@ public partial class RegistroPage : ContentPage
 
     public async void Registrarse(object sender, EventArgs e)
     {
+        List<string> errores = new List<string>();
+        
         if (nameValidator.IsNotValid)
         {
-            DisplayAlert("Error", "Tienes que introducir el nombre", "OK");
+            errores.Add("-Tienes que introducir el nombre"+Environment.NewLine);
+        }
+        if (ape1Validator.IsNotValid)
+        {
+            errores.Add("-Tienes que introducir el primer apellido" + Environment.NewLine);
+        }
+        if (ape2Validator.IsNotValid)
+        {
+            errores.Add("-Tienes que introducir el segundo apellido" + Environment.NewLine);
+        }
+        if (telValidator.IsNotValid)
+        {
+            errores.Add("-Tienes que introducir el telefono" + Environment.NewLine);
+        }
+        if (emailValidator.IsNotValid)
+        {
+            errores.Add(emailValidator.Errors[0].ToString());
+            errores.Add("");
+        }
+        if (passValidator.IsNotValid)
+        {
+            errores.Add("-Tienes que introducir la contraseña" + Environment.NewLine);
+        }
+        else if (!IsValidPassword(txt_pass.Text))
+        {
+            errores.Add("-La contraseña debe tener 8 carácteres, una mayúscula, una minúscula y un numero" + Environment.NewLine);
+        }
+
+        if (errores.Count!=0)
+        {
+            string mensaje = String.Join(Environment.NewLine,errores);
+            DisplayAlert("Error", mensaje, "OK");
         }
         else
         {

@@ -37,7 +37,7 @@
             </Entry.Behaviors>
         </Entry>
         <Label Text="Teléfono" Margin="5,10,0,0" TextColor="Black"/>
-        <Entry x:Name="txt_tel" Margin="5,0,0,0" Placeholder="Introduce tu teléfono">
+        <Entry x:Name="txt_tel" Margin="5,0,0,0" Placeholder="Introduce tu teléfono" MaxLength="9" Keyboard="Telephone">
             <Entry.Behaviors>
                 <toolkit:TextValidationBehavior
                         x:Name="telValidator"
@@ -54,12 +54,12 @@
                         Flags="ValidateOnAttaching,ValidateOnValueChanged">
                     <toolkit:TextValidationBehavior
                         Flags="ValidateOnAttaching,ValidateOnValueChanged"
-                            toolkit:MultiValidationBehavior.Error="Tienes que introducir el email"
+                            toolkit:MultiValidationBehavior.Error="-Tienes que introducir el email"
                         MinimumLength="1"
                         />
                     <toolkit:EmailValidationBehavior
                             Flags="ValidateOnAttaching,ValidateOnValueChanged"
-                            toolkit:MultiValidationBehavior.Error="El formato de email es incorrecto"
+                            toolkit:MultiValidationBehavior.Error="-El formato de email es incorrecto"
                             />
                 </toolkit:MultiValidationBehavior>
             </Entry.Behaviors>
