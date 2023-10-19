@@ -11,7 +11,6 @@ namespace Login_AM.Pages;
 
 public partial class MainPage : ContentPage
 {
-    private readonly HttpClient _httpClient = new HttpClient();
     public MainPage()
 	{
 		InitializeComponent();
@@ -45,15 +44,13 @@ public partial class MainPage : ContentPage
             ServicioCertificacion handler = new ServicioCertificacion();
             HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());
             string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:7083" : "https://localhost:7083";
-            //string BaseAddress = "https://localhost:7083";
             string todoUrl = $"{BaseAddress}/api/";
-            _httpClient.BaseAddress = new Uri(todoUrl);
             var userParams = new User(username, password);
             var result = await GetUserParametersAsync(userParams, todoUrl);
             var resultparse = JsonSerializer.Deserialize<UserResponse>(result);
             if (resultparse.token!=null)
             {
-                await Navigation.PushAsync(new InicioPage(resultparse.token));
+                await Navigation.PushAsync(new MenuPage(resultparse.token,resultparse.firstName));
             }
             
         }

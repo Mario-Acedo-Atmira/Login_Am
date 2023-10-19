@@ -7,7 +7,6 @@ namespace Login_AM.Pages;
 
 public partial class InicioPage : ContentPage
 {
-    private readonly HttpClient _httpClient = new HttpClient();
     string Token;
     public InicioPage(string token)
 	{
