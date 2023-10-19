@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
             var resultparse = JsonSerializer.Deserialize<UserResponse>(result);
             if (resultparse.token!=null)
             {
-                await Navigation.PushAsync(new MenuPage(resultparse.token,resultparse.firstName));
+                await Navigation.PushAsync(new MenuPage(resultparse.token,resultparse.firstName,resultparse.email));
             }
             
         }

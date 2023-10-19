@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Login_AM.Pages.ProfilePage"
+             Title="Perfil">
+    <VerticalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="5,30,5,5">
+            <Label FontSize="24" TextColor="Black" x:Name="lblName"></Label>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="5,30,5,5">
+            <Label FontSize="24" TextColor="Black" x:Name="lblEmail"></Label>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -68,6 +68,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="Pages\ForumPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Pages\InicioPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -75,6 +78,9 @@
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
       <MauiXaml Update="Pages\MenuPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="Pages\ProfilePage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
       <MauiXaml Update="Pages\RegistroPage.xaml">

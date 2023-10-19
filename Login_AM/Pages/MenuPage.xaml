@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Login_AM.Pages.MenuPage"
-             Title="MenuPage">
+             Title="Inicio">
     <VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="Center" Margin="5,30,5,5">
             <Label FontSize="24" TextColor="Black" x:Name="lblBienvenido"></Label>
@@ -13,7 +13,7 @@
                 <Label Text="Museo" TextColor="Black" Margin="50,10,0,0"/>
             </VerticalStackLayout>
             <VerticalStackLayout Margin="5,5,10,5">
-                <ImageButton Source="foro.png"/>
+                <ImageButton Source="foro.png" Clicked="ForumButton_Clicked"/>
                 <Label Text="Foros" TextColor="Black" Margin="50,10,0,0"/>
             </VerticalStackLayout>
         </HorizontalStackLayout>
@@ -23,7 +23,7 @@
                 <Label Text="Favoritos" TextColor="Black" Margin="40,10,0,0"/>
             </VerticalStackLayout>
             <VerticalStackLayout Margin="5,5,10,5">
-                <ImageButton Source="profile.png" />
+                <ImageButton Source="profile.png" Clicked="ProfileButton_Clicked"/>
                 <Label Text="Perfil" TextColor="Black" Margin="50,10,0,0"/>
             </VerticalStackLayout>
         </HorizontalStackLayout>
