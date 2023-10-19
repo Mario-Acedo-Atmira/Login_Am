@@ -13,9 +13,11 @@ public partial class AddWorkItemPage : ContentPage
     private async void Button_Clicked(object sender, EventArgs e)
     {
         subirimagen();
-        
-        var result2 = await DownloadImage(txt_titulo.Text.Replace(" ", ""));
+        var result2 = await DownloadImage(txt_titulo.Text.Replace(" ", "")+"/icono.png");
         imagen.Source= result2;
+        imagen.MaximumWidthRequest = 140;
+        imagen.MaximumHeightRequest = 140;
+        
     }
     private async void subirimagen()
     {
@@ -29,8 +31,8 @@ public partial class AddWorkItemPage : ContentPage
 
                 if (txt_titulo.Text!=null)
                 {
-                    var result2 = await UpImage(stream, txt_titulo.Text.Replace(" ","") + "/icono");
-                    Thread.Sleep(5000);
+                    var result2 = await UpImage(stream, txt_titulo.Text.Replace(" ","") + "/icono.png");
+                    
                 }
                 
 
