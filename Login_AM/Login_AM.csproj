@@ -74,6 +74,9 @@
       <MauiXaml Update="Pages\DetalleMonumentoPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Pages\MenuPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Pages\RegistroPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
