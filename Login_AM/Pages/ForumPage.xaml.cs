@@ -79,7 +79,7 @@ public partial class ForumPage : ContentPage
                 layout.Children.Add(ChildLayout);
                 btn_image.Clicked += delegate (object sender, EventArgs e)
                 {
-                    Navigation.PushAsync(new DetalleMonumentoPage(item, _token));
+                    Navigation.PushAsync(new DetalleMonumentoPage(item, _token, 1));
                 };
             }
 

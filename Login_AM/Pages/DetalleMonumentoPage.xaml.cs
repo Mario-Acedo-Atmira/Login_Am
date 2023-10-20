@@ -1,5 +1,7 @@
 
 
+using Firebase.Auth;
+using Firebase.Storage;
 using Login_AM.Data;
 using Login_AM.Models;
 using System.Text.Json;
@@ -10,14 +12,16 @@ public partial class DetalleMonumentoPage : ContentPage
 {
     private readonly HttpClient _httpClient = new HttpClient();
     string Token;
+    int _cont;
     WorkItemsResponse Item;
-    public DetalleMonumentoPage(WorkItemsResponse item, string token)
+    public DetalleMonumentoPage(WorkItemsResponse item, string token, int cont)
 	{
         
 		InitializeComponent();
 
         Token = token;
         Item = item;
+        _cont = cont;
         Conexion();
     }
 
@@ -66,7 +70,12 @@ public partial class DetalleMonumentoPage : ContentPage
         
         titulo.Text = item.title;
         description.Text = item.description;
-        img.Source = "Monumento3.png";
+        if (_cont==0)
+        {
+            var source = await DownloadImage(item.title.Replace(" ","")+"/icono.png");
+            img.Source = source;
+        }
+        
         foreach (var comment in item.comments)
         {
             VerticalStackLayout views = new VerticalStackLayout();
@@ -100,5 +109,32 @@ public partial class DetalleMonumentoPage : ContentPage
         {
             throw new Exception($"Error al realizar la solicitud: {response.StatusCode}");
         }
+    }
+
+    public async Task<string> DownloadImage(string path)
+    {
+
+        try
+        {
+
+            FirebaseAuthProvider firebaseAuthProvider = new(new FirebaseConfig("AIzaSyAytxMJqGisvGoaCNvuUjXnMxp6fLSsYnc"));
+            FirebaseAuthLink firebaseAuthLink = await firebaseAuthProvider
+            .SignInWithEmailAndPasswordAsync("danielobry@gmail.com", "Admin12345");
+            FirebaseStorageReference storage = new FirebaseStorage("museumatmira.appspot.com", new
+            FirebaseStorageOptions
+            {
+                AuthTokenAsyncFactory = () => Task.FromResult(firebaseAuthLink.FirebaseToken),
+                ThrowOnCancel = false
+            })
+            .Child(path);
+
+            var storage2 = storage.GetDownloadUrlAsync();
+            return await storage2;
+        }
+        catch (Exception ex)
+        {
+            return "error";
+        }
+
     }
 }

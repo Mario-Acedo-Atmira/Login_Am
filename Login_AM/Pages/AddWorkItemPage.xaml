@@ -7,10 +7,10 @@
         <VerticalStackLayout x:Name="layout">
             <Label Text="Título"  Margin="5,10,0,0" TextColor="Black"/>
             <Entry  x:Name="txt_titulo" Placeholder="Introduce el título" Margin="5,0,0,0"></Entry>
-            <Label Text="Descripción" x:Name="txt_descripcion" Margin="5,10,0,0" TextColor="Black"/>
-            <Entry Placeholder="Introduce la descripción" Margin="5,0,0,0"></Entry>
+            <Label Text="Descripción"  Margin="5,10,0,0" TextColor="Black"/>
+            <Entry Placeholder="Introduce la descripción" x:Name="txt_descripcion" Margin="5,0,0,0"></Entry>
             <Button Text="Subir Imagen" Clicked="Button_Clicked"></Button>
-            <ImageButton x:Name="imagen"></ImageButton>
+            <Button Text="Añadir" Clicked="AddWorkItem_Clicked"></Button>
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

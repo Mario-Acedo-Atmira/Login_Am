@@ -16,7 +16,7 @@ public partial class MenuPage : ContentPage
 
     private void InicioButton_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new InicioPage(_token));
+        Navigation.PushAsync(new InicioPage(_token, _email));
     }
     private void ForumButton_Clicked(object sender, EventArgs e)
     {

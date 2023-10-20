@@ -8,6 +8,7 @@ namespace Login_AM.Models
 {
     internal class UserResponse
     {
+        public int id { get; set; }
         public string firstName { get; set; }
         public string lastName1 { get; set; }
         public string lastName2 { get; set; }

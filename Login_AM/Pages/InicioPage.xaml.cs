@@ -1,3 +1,5 @@
+using Firebase.Auth;
+using Firebase.Storage;
 using Login_AM.Data;
 using Login_AM.Models;
 using System.Net.Http.Json;
@@ -8,10 +10,12 @@ namespace Login_AM.Pages;
 public partial class InicioPage : ContentPage
 {
     string Token;
-    public InicioPage(string token)
+    string _email;
+    public InicioPage(string token, string email)
 	{
 		InitializeComponent();
         Token = token;
+        _email = email;
         Conexion();
     }
     private async Task Conexion()
@@ -63,7 +67,7 @@ public partial class InicioPage : ContentPage
                 VerticalStackLayout ChildLayout = new VerticalStackLayout();
                 ImageButton btn_image = new ImageButton();
                 Label label = new Label();
-                btn_image.Source = "Monumento3.png";
+                btn_image.Source = await DownloadImage(item.title+"/icono.png");
                 btn_image.HorizontalOptions = LayoutOptions.Center;
                 btn_image.VerticalOptions = LayoutOptions.Center;
                 btn_image.WidthRequest = 360;
@@ -80,7 +84,7 @@ public partial class InicioPage : ContentPage
                 layout.Children.Add(ChildLayout);
                 btn_image.Clicked += delegate (object sender, EventArgs e)
                 {
-                    Navigation.PushAsync(new DetalleMonumentoPage(item,Token));
+                    Navigation.PushAsync(new DetalleMonumentoPage(item,Token, 0));
                 };
             }
             
@@ -89,9 +93,34 @@ public partial class InicioPage : ContentPage
         
         
     }
+    public async Task<string> DownloadImage(string path)
+    {
 
+        try
+        {
+
+            FirebaseAuthProvider firebaseAuthProvider = new(new FirebaseConfig("AIzaSyAytxMJqGisvGoaCNvuUjXnMxp6fLSsYnc"));
+            FirebaseAuthLink firebaseAuthLink = await firebaseAuthProvider
+            .SignInWithEmailAndPasswordAsync("danielobry@gmail.com", "Admin12345");
+            FirebaseStorageReference storage = new FirebaseStorage("museumatmira.appspot.com", new
+            FirebaseStorageOptions
+            {
+                AuthTokenAsyncFactory = () => Task.FromResult(firebaseAuthLink.FirebaseToken),
+                ThrowOnCancel = false
+            })
+            .Child(path);
+
+            var storage2 = storage.GetDownloadUrlAsync();
+            return await storage2;
+        }
+        catch (Exception ex)
+        {
+            return "error";
+        }
+
+    }
     private void Button_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new AddWorkItemPage());
+        Navigation.PushAsync(new AddWorkItemPage(Token,_email));
     }
 }
